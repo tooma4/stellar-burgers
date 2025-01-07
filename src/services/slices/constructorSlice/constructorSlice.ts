@@ -29,10 +29,7 @@ export const initialState: TConsturctorState = {
   error: null
 };
 
-export const orderBurger = createAsyncThunk(
-  'user/order',
-  async (data: string[]) => orderBurgerApi(data)
-);
+export const orderBurger = createAsyncThunk('user/order', orderBurgerApi);
 
 export const constructorSlice = createSlice({
   name: 'constructorBurger',

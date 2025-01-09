@@ -28,18 +28,34 @@ beforeEach(() => {
 
 describe('добавление ингредиента в список заказа', () => {
   it('инкремент счетчика ингредиента', () => {
+    cy.get(STAFFING_ID).find('.counter__num').should('not.exist');
     cy.get(STAFFING_ID).children('button').click();
     cy.get(STAFFING_ID).find('.counter__num').contains('1');
   });
   describe('добавление булок и начинок', () => {
     it('добавление булки и начинки в список заказа', () => {
+      cy.get(CONSTRUCTOR_BURGER)
+        .find('.constructor-element')
+        .should('not.exist');
       cy.get(BUN_ID).children('button').click();
       cy.get(STAFFING_ID).children('button').click();
+      cy.get(CONSTRUCTOR_BURGER)
+        .find('.constructor-element')
+        .should('have.length', 3);
     });
     it('замена булки другой булкой при полном списке начинок ', () => {
+      cy.get(CONSTRUCTOR_BURGER)
+        .find('.constructor-element')
+        .should('not.exist');
       cy.get(BUN_ID).children('button').click();
       cy.get(STAFFING_ID).children('button').click();
+      cy.get(CONSTRUCTOR_BURGER)
+        .find('.constructor-element')
+        .should('have.length', 3);
       cy.get(BUN2_ID).children('button').click();
+      cy.get(CONSTRUCTOR_BURGER)
+        .find('.constructor-element')
+        .should('have.length', 3);
     });
   });
 });
@@ -49,7 +65,7 @@ describe('модельные окна', () => {
     cy.get('@modal').should('be.empty');
     cy.get(STAFFING_ID).children('a').click();
     cy.get('@modal').should('be.not.empty');
-    cy.url().should('include', '643d69a5c3f7b9001cfa0949');
+    cy.get('@modal').should('contain.text', 'Мини-салат Экзо-Плантаго');
   });
   it('закрытие модального окна ингредиента по клику на кнопку крестик', () => {
     cy.get('@modal').should('be.empty');
@@ -82,6 +98,7 @@ describe('оформление заказа', () => {
   });
 
   it('отправка заказа c проверкой корректного ответа', () => {
+    cy.get(CONSTRUCTOR_BURGER).find('.constructor-element').should('not.exist');
     cy.get(BUN_ID).children('button').click();
     cy.get(STAFFING_ID).children('button').click();
     cy.get(ORDER_BUTTON).click();

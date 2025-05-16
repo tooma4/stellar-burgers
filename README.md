@@ -23,7 +23,7 @@
 - Webpack, ESLint, Prettier
 
 ## 📸 Примеры работы
-![Сайт](https://tooma4.github.io/stellar-burgers/)
+[Готовый проект на gh-pages](https://tooma4.github.io/stellar-burgers/)
 ![Скриншот конструктора](./public/screen.png)
 
 ## 💡 Выводы
